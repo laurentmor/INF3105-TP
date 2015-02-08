@@ -7,8 +7,16 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <string>
+#include<fstream>
 
 using namespace std;
+ifstream fichier;
+const string FICHIER_MANQUANT="nom du fichier à traiter manquant"; 
+const string NIVEAU_EXCEPTION_ERREUR="[Erreur] ";
+const string FICHIER_INEXISTANT="fichier inexistant: ";
+const string TROP_ARGUMENTS="trop d'arguments fournis au programme";
+
 /**
  * Analyser la ligne de commande qui doit être comme suite pour être conforme :
  * freqencier (ou nom de l'exécutable) <nomFichier>
@@ -20,7 +28,13 @@ void traiterLigneCommande(int argc, char** argv);
  * Afficher la manière d'utiliser le programme
  * @param nomExecutable le nom de l'exécutable à utiliser lors de l'appel
  */
-void afficherUsage(char* nomExecutable);
+void afficherUsage(const char* nomExecutable);
+/**
+ * Sert à vérifier qu'un fichier existe avant son ouverture
+ * @param nomFichier le nom de fichier à vérifier
+ * @return TRUE s'il existe 
+ */
+bool verifierExistanceFicher(const char* nomFichier);
 
 int main(int argc, char** argv) {
     try {
@@ -33,13 +47,23 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void afficherUsage(char* nomExecutable) {
+void afficherUsage(const char* nomExecutable) {
     cout << "Usage: " << nomExecutable << " <fichier>" << endl;
 }
 
 void traiterLigneCommande(int argc, char** argv) {
-    if (argc != 2)throw runtime_error("[Erreur] nom du fichier à traiter "
-            "manquant");
+    if (argc < 2)throw runtime_error(NIVEAU_EXCEPTION_ERREUR+FICHIER_MANQUANT);
     else{
+        if(argc>2){
+        throw runtime_error(NIVEAU_EXCEPTION_ERREUR+TROP_ARGUMENTS);
+        }
+        else if(verifierExistanceFicher(argv[1])){
+        
+        }
     }
+}
+bool verifierExistanceFicher(const char* nom){
+    ifstream fichier(nom);
+    if(fichier) return true;
+    else throw runtime_error(NIVEAU_EXCEPTION_ERREUR+FICHIER_INEXISTANT+nom);
 }
