@@ -1,12 +1,7 @@
 #!/bin/sh
-echo "Build script pour exercises du livre CPP"
-cd exercises_livre_cpp
-echo "Build exercises"
+export base=$PWD
+cd frequencier
 make clean
-make
-cd ../TP2
-echo "Build TP2 "
-make clean
-make
-
+make 
+cd $base
 
