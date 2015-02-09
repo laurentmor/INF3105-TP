@@ -2,6 +2,7 @@
 export base=$PWD
 cd frequencier
 make clean
-make 
+make
+./frequencier 
 cd $base
 

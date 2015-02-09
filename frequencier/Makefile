@@ -1,6 +1,5 @@
 OPTIONS = -W -Wall -O3
-run:
-    ./frequencier
+
 	
 frequencier:frequencier.cpp
 	g++ ${OPTIONS} -o frequencier frequencier.cpp
