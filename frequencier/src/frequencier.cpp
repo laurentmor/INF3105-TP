@@ -19,6 +19,7 @@ const string FICHIER_MANQUANT="nom du fichier à traiter manquant";
 const string NIVEAU_EXCEPTION_ERREUR="[Erreur] ";
 const string FICHIER_INEXISTANT="fichier inexistant: ";
 const string TROP_ARGUMENTS="trop d'arguments fournis au programme";
+string nomExec=NULL;
 
 /**
  * Analyser la ligne de commande qui doit être comme suite pour être conforme :
@@ -37,13 +38,20 @@ void afficherUsage(const char* nomExecutable);
  * @param nomFichier le nom de fichier à vérifier
  * @return TRUE s'il existe 
  */
-bool verifierExistanceFicher(const char* nomFichier);
+bool verifierExistanceFicher(const char* );
+/**
+ * Lance un exception de type runtime 
+ * @param  le niveau d'exception [erreur] (pour l'instant)
+ * @param le message associé
+ */
+void lancerRuntimeException(const string&,const string&); 
 
 int main(int argc, char** argv) {
     try {
+        nomExec=argv[0];
         traiterLigneCommande(argc,argv);
     } catch (runtime_error& e) {
-        cout<<e.what()<<endl;
+        cerr<<e.what()<<endl;
         afficherUsage(argv[0]);
         return -1;
     }
@@ -51,7 +59,7 @@ int main(int argc, char** argv) {
 }
 
 void afficherUsage(const char* nomExecutable) {
-    cout << "Usage: " << nomExecutable << " <fichier>" << endl;
+    cout << "Usage: " << *nomExecutable << " <fichier>" << endl;
 }
 
 void traiterLigneCommande(int argc, char** argv) {
