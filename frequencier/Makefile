@@ -10,7 +10,7 @@ commit :
 	git config user.email "auto@dummy.ca"
 	
 	git add -A .
-	git commit -m 'Build automatique - ${BUILDID}'
+	git commit -a -m 'Build automatique - ${BUILDID}'
 
 
 frequencier:${SRC}/frequencier.cpp
