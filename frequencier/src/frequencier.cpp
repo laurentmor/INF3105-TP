@@ -77,7 +77,7 @@ void traiterLigneCommande(int argc, char** argv) {
                 if (!isalnum(caractereCourant)) {
                     if (motLu.size() > 0) {
                         nbMots++;
-                        cout << caractereCourant ;
+                       
                         cout<<motLu;
                         motLu.clear();
                     }
