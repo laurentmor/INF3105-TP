@@ -77,6 +77,7 @@ void traiterLigneCommande(int argc, char** argv) {
                 if(isalnum(caractereCourant)){
                     motLu.push_back(caractereCourant);
                     
+                    
                 }
                 else{
                    
