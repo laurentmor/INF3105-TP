@@ -70,6 +70,7 @@ void traiterLigneCommande(int argc, char** argv) {
 
 
             while (!fichier.eof() ) {
+                caractereCourant=fichier.get();
                 //Si ce n'est pas un caractère alphanumérique,
                 //sautons-le et considérons qu'on commence un nouveau mot
                 //Il faut aussi ajouter une vérification de plus
