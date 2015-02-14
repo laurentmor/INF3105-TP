@@ -83,6 +83,7 @@ void traiterLigneCommande(int argc, char** argv) {
                     }
                     
                 } else motLu += caractereCourant;
+                cout << caractereCourant << endl;
 
 
 
