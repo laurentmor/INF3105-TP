@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 }
 
 void afficherUsage(const char* nomExecutable) {
-    cout << "Usage: " << *nomExecutable << " <fichier>" << endl;
+    cout << "Usage: " << nomExecutable << " <fichier>" << endl;
 }
 
 void traiterLigneCommande(int argc, char** argv) {
