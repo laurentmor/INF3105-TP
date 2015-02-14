@@ -78,3 +78,6 @@ bool verifierExistanceFicher(const char* nom){
     if(fichier) return true;
     else throw runtime_error(NIVEAU_EXCEPTION_ERREUR+FICHIER_INEXISTANT+nom);
 }
+
+void lancerRuntimeException(const string& niveau,const string& message){
+}
