@@ -57,12 +57,16 @@ void traiterLigneCommande(int argc, char** argv) {
         if (argc > 2) {
             throw runtime_error(NIVEAU_EXCEPTION_ERREUR + TROP_ARGUMENTS);
         } else if (verifierExistanceFicher(argv[1])) {
-            char word;
+            
             fichier.open(argv[1],ios::in);
             if(!fichier.is_open()) return;
-            
-            while (fichier >> word) {
-                cout << word << '\n';
+            //on procède à la lecture caractère par caractère 
+            //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
+            //dans la formation d'un mot
+            char caractereCourant;
+            string motLu;
+            while (fichier >> caractereCourant) {
+                cout << caractereCourant << '\n';
             }
         }
     }
