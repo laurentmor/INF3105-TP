@@ -68,7 +68,8 @@ void traiterLigneCommande(int argc, char** argv) {
             string motLu;
             locale loc;
             while (fichier >> caractereCourant) {
-                cout << caractereCourant << '\n';
+                cout << isalnum(caractereCourant) << '\n';
+                
                     
                 
             }
