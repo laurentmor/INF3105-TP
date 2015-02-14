@@ -73,7 +73,7 @@ void traiterLigneCommande(int argc, char** argv) {
                 //sautons-le et considérons qu'on commence un nouveau mot
                 //Il faut aussi ajouter une vérification de plus
                 //afin de s'assurer qu'un mot "vide" n'est pas considéré
-                if(!isalnum(caractereCourant)&&motLu.size()>0){
+                if(!isalnum(caractereCourant)||motLu.size()>0){
                    cout<<motLu<<endl;
                    motLu.clear();
                 }
