@@ -3,16 +3,12 @@
  * Author: laurent
  *
  * Created on 8 février 2015, 14:42
- * 
- * 
- * 
  */
 
 #include <iostream>
 #include <stdexcept>
 #include <string>
 #include<fstream>
-#include <cstdlib>
 
 using namespace std;
 ifstream fichier;
@@ -20,7 +16,6 @@ const string FICHIER_MANQUANT="nom du fichier à traiter manquant";
 const string NIVEAU_EXCEPTION_ERREUR="[Erreur] ";
 const string FICHIER_INEXISTANT="fichier inexistant: ";
 const string TROP_ARGUMENTS="trop d'arguments fournis au programme";
-string nomExec=NULL;
 
 /**
  * Analyser la ligne de commande qui doit être comme suite pour être conforme :
@@ -39,19 +34,17 @@ void afficherUsage(const char* nomExecutable);
  * @param nomFichier le nom de fichier à vérifier
  * @return TRUE s'il existe 
  */
-bool verifierExistanceFicher(const char* );
- 
+bool verifierExistanceFicher(const char* nomFichier);
 
 int main(int argc, char** argv) {
     try {
-        nomExec=argv[0];
         traiterLigneCommande(argc,argv);
     } catch (runtime_error& e) {
-        cerr<<e.what()<<endl;
+        cout<<e.what()<<endl;
         afficherUsage(argv[0]);
-        exit(-1);
+        return -1;
     }
-     exit(0);
+    return 0;
 }
 
 void afficherUsage(const char* nomExecutable) {
@@ -65,9 +58,7 @@ void traiterLigneCommande(int argc, char** argv) {
         throw runtime_error(NIVEAU_EXCEPTION_ERREUR+TROP_ARGUMENTS);
         }
         else if(verifierExistanceFicher(argv[1])){
-            cout<<fichier<<endl;
-          
-            
+        
         }
     }
 }
@@ -76,4 +67,3 @@ bool verifierExistanceFicher(const char* nom){
     if(fichier) return true;
     else throw runtime_error(NIVEAU_EXCEPTION_ERREUR+FICHIER_INEXISTANT+nom);
 }
-
