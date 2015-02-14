@@ -83,7 +83,7 @@ void traiterLigneCommande(int argc, char** argv) {
                 else{
                    
                 cout<<motLu<<endl;
-                //motLu.clear();
+                motLu.clear();
                 }
                 
 
