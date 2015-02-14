@@ -72,7 +72,7 @@ void traiterLigneCommande(int argc, char** argv) {
                 //Si ce n'est pas un caractère alphanumérique,
                 //sautons-le et considérons qu'on commence un nouveau mot
                 if(!isalnum(caractereCourant)){
-                    cout<<motLu==NULL;
+                    cout<<motLu.size();
                 }
                 else cout<<caractereCourant<<endl;
                 
