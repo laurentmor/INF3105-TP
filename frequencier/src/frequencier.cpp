@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <string>
 #include<fstream>
+#include <cstdlib>
 
 using namespace std;
 ifstream fichier;
@@ -39,12 +40,7 @@ void afficherUsage(const char* nomExecutable);
  * @return TRUE s'il existe 
  */
 bool verifierExistanceFicher(const char* );
-/**
- * Lance un exception de type runtime 
- * @param  le niveau d'exception [erreur] (pour l'instant)
- * @param le message associé
- */
-void lancerRuntimeException(const string&,const string&); 
+ 
 
 int main(int argc, char** argv) {
     try {
@@ -53,9 +49,9 @@ int main(int argc, char** argv) {
     } catch (runtime_error& e) {
         cerr<<e.what()<<endl;
         afficherUsage(argv[0]);
-        return -1;
+        exit(-1);
     }
-    return 0;
+     exit(0);
 }
 
 void afficherUsage(const char* nomExecutable) {
@@ -69,7 +65,7 @@ void traiterLigneCommande(int argc, char** argv) {
         throw runtime_error(NIVEAU_EXCEPTION_ERREUR+TROP_ARGUMENTS);
         }
         else if(verifierExistanceFicher(argv[1])){
-        
+            cout<<fichier<<endl;
         }
     }
 }
@@ -79,5 +75,3 @@ bool verifierExistanceFicher(const char* nom){
     else throw runtime_error(NIVEAU_EXCEPTION_ERREUR+FICHIER_INEXISTANT+nom);
 }
 
-void lancerRuntimeException(const string& niveau,const string& message){
-}
