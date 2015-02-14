@@ -18,6 +18,10 @@ const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
 const string TROP_ARGUMENTS = "trop d'arguments fournis au programme";
 
+struct Couple{
+    string mot;
+    int frequence=0;
+};
 /**
  * Analyser la ligne de commande qui doit être comme suite pour être conforme :
  * freqencier (ou nom de l'exécutable) <nomFichier>
@@ -65,24 +69,22 @@ void traiterLigneCommande(int argc, char** argv) {
             //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
             //dans la formation d'un mot
             char caractereCourant;
-            string motLu="";
-            
+            string motLu = "";
+            while (!fichier.eof()) {
+                caractereCourant = fichier.get();
 
-
-            while (!fichier.eof() ) {
-                caractereCourant=fichier.get();
-               
-                if(isalnum(caractereCourant)){
+                if (isalnum(caractereCourant)) {
                     motLu.push_back(caractereCourant);
-                    
-                    
+
+
+                } else {
+
+                    Couple c;
+                    c.mot=motLu;
+                    cout<<c.mot;
+                    motLu.clear();
                 }
-                else{
-                   
-                cout<<motLu<<endl;
-                motLu.clear();
-                }
-                
+
 
 
 
