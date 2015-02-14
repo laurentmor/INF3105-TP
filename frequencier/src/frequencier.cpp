@@ -57,7 +57,7 @@ void traiterLigneCommande(int argc, char** argv) {
         if (argc > 2) {
             throw runtime_error(NIVEAU_EXCEPTION_ERREUR + TROP_ARGUMENTS);
         } else if (verifierExistanceFicher(argv[1])) {
-            string word;
+            char word;
             fichier.open(argv[1],ios::in);
             if(!fichier.is_open()) return;
             
