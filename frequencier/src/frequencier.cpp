@@ -65,7 +65,7 @@ void traiterLigneCommande(int argc, char** argv) {
             //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
             //dans la formation d'un mot
             char caractereCourant;
-            string motLu;
+            string motLu="";
             int nbMots = 0;
 
 
@@ -74,15 +74,10 @@ void traiterLigneCommande(int argc, char** argv) {
                 //sautons-le et considérons qu'on commence un nouveau mot
                 //Il faut aussi ajouter une vérification de plus
                 //afin de s'assurer qu'un mot "vide" n'est pas considéré
-                if (!isalnum(caractereCourant)) {
-                    //if (motLu.size() > 0) {
-                        nbMots++;
-                       
-                        cout<<motLu;
-                        
-                    //}
-                    
-                } else motLu.push_back(caractereCourant);
+                if(isalnum(caractereCourant)){
+                    motLu.push_back(caractereCourant);
+                    cout<<motLu<<endl;
+                }
                 
 
 
