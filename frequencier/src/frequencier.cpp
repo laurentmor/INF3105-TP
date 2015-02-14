@@ -78,11 +78,11 @@ void traiterLigneCommande(int argc, char** argv) {
                     if (motLu.size() > 0) {
                         nbMots++;
                         cout << caractereCourant ;
-                        cout << motLu.size() << endl;
-                        motLu="";
+                        cout<<motLu;
+                        motLu.clear();
                     }
                     
-                } else motLu += caractereCourant;
+                } else motLu.push_back(caractereCourant);
                 cout << caractereCourant ;
 
 
