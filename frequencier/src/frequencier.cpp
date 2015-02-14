@@ -66,7 +66,7 @@ void traiterLigneCommande(int argc, char** argv) {
             //dans la formation d'un mot
             char caractereCourant;
             string motLu="";
-            int nbMots = 0;
+            
 
 
             while (fichier >> caractereCourant) {
@@ -81,7 +81,7 @@ void traiterLigneCommande(int argc, char** argv) {
                 else{
                    
                 cout<<motLu<<endl;
-                motLu.clear();
+                //motLu.clear();
                 }
                 
 
