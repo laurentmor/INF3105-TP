@@ -12,10 +12,10 @@
 
 using namespace std;
 ifstream fichier;
-const string FICHIER_MANQUANT="nom du fichier à traiter manquant"; 
-const string NIVEAU_EXCEPTION_ERREUR="[Erreur] ";
-const string FICHIER_INEXISTANT="fichier inexistant: ";
-const string TROP_ARGUMENTS="trop d'arguments fournis au programme";
+const string FICHIER_MANQUANT = "nom du fichier à traiter manquant";
+const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
+const string FICHIER_INEXISTANT = "fichier inexistant: ";
+const string TROP_ARGUMENTS = "trop d'arguments fournis au programme";
 
 /**
  * Analyser la ligne de commande qui doit être comme suite pour être conforme :
@@ -38,9 +38,9 @@ bool verifierExistanceFicher(const char* nomFichier);
 
 int main(int argc, char** argv) {
     try {
-        traiterLigneCommande(argc,argv);
+        traiterLigneCommande(argc, argv);
     } catch (runtime_error& e) {
-        cout<<e.what()<<endl;
+        cout << e.what() << endl;
         afficherUsage(argv[0]);
         return -1;
     }
@@ -52,18 +52,21 @@ void afficherUsage(const char* nomExecutable) {
 }
 
 void traiterLigneCommande(int argc, char** argv) {
-    if (argc < 2)throw runtime_error(NIVEAU_EXCEPTION_ERREUR+FICHIER_MANQUANT);
-    else{
-        if(argc>2){
-        throw runtime_error(NIVEAU_EXCEPTION_ERREUR+TROP_ARGUMENTS);
-        }
-        else if(verifierExistanceFicher(argv[1])){
-        
+    if (argc < 2)throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_MANQUANT);
+    else {
+        if (argc > 2) {
+            throw runtime_error(NIVEAU_EXCEPTION_ERREUR + TROP_ARGUMENTS);
+        } else if (verifierExistanceFicher(argv[1])) {
+            string word;
+            while (fichier >> word) {
+                cout << word << '\n';
+            }
         }
     }
 }
-bool verifierExistanceFicher(const char* nom){
+
+bool verifierExistanceFicher(const char* nom) {
     ifstream fichier(nom);
-    if(fichier) return true;
-    else throw runtime_error(NIVEAU_EXCEPTION_ERREUR+FICHIER_INEXISTANT+nom);
+    if (fichier) return true;
+    else throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_INEXISTANT + nom);
 }
