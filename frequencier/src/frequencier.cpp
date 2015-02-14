@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <string>
 #include<fstream>
+#include <locale> 
 
 using namespace std;
 ifstream fichier;
