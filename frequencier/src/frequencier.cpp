@@ -68,6 +68,7 @@ void traiterLigneCommande(int argc, char** argv) {
             while (fichier >> caractereCourant) {
                 cout << caractereCourant << '\n';
                 
+                
             }
         }
     }
