@@ -79,7 +79,7 @@ void traiterLigneCommande(int argc, char** argv) {
                         nbMots++;
                        
                         cout<<motLu;
-                        motLu.clear();
+                        
                     //}
                     
                 } else motLu.push_back(caractereCourant);
