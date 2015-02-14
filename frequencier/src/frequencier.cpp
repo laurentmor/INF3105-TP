@@ -71,8 +71,8 @@ void traiterLigneCommande(int argc, char** argv) {
             while (fichier >> caractereCourant) {
                 //Si ce n'est pas un caractère alphanumérique,
                 //sautons-le et considérons qu'on commence un nouveau mot
-                if(!isalnum(caractereCourant)){
-                    cout<<motLu.size();
+                if(!isalnum(caractereCourant)&&motLu.size()==0){
+                    
                 }
                 else cout<<caractereCourant<<endl;
                 
