@@ -66,6 +66,7 @@ void traiterLigneCommande(int argc, char** argv) {
             //dans la formation d'un mot
             char caractereCourant;
             string motLu;
+            locale loc;
             while (fichier >> caractereCourant) {
                 cout << caractereCourant << '\n';
                     
