@@ -69,6 +69,7 @@ void traiterLigneCommande(int argc, char** argv) {
                 cout << caractereCourant << '\n';
                 
                 
+                
             }
         }
     }
