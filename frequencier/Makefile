@@ -3,7 +3,7 @@ SRC=src
 .PHONY: all commit
 BUILDID=$(shell date +%Y%m%d-%H:%M:%S)
 	
-all:frequencier commit
+all:clean frequencier commit
 
 commit :
 	git config user.name "AUTO"
