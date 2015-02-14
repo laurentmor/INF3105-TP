@@ -74,7 +74,7 @@ void traiterLigneCommande(int argc, char** argv) {
                 if(!isalnum(caractereCourant)){
                     cout<<motLu==NULL;
                 }
-                else cout<<"False"<<endl;
+                else cout<<caractereCourant<<endl;
                 
                     
                 
