@@ -66,6 +66,7 @@ void traiterLigneCommande(int argc, char** argv) {
         }
         else if(verifierExistanceFicher(argv[1])){
             cout<<fichier<<endl;
+            
         }
     }
 }
