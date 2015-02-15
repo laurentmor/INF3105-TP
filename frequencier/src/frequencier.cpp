@@ -8,8 +8,9 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#include<fstream>
-#include <locale> 
+#include <fstream>
+#include <locale>
+#include <vector>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
 const string TROP_ARGUMENTS = "trop d'arguments fournis au programme";
 
-struct Couple{
+struct Couple {
     string mot;
     int frequence;
 };
@@ -44,7 +45,13 @@ bool verifierExistanceFicher(const char* nomFichier);
 
 int main(int argc, char** argv) {
     try {
-        traiterLigneCommande(argc, argv);
+        vector<Couple> v;
+        Couple c=Couple();
+        c.mot = "test";
+        c.frequence = 12;
+        v.push_back(c);
+       
+        //traiterLigneCommande(argc, argv);
     } catch (runtime_error& e) {
         cout << e.what() << endl;
         afficherUsage(argv[0]);
@@ -81,8 +88,8 @@ void traiterLigneCommande(int argc, char** argv) {
                 } else {
 
                     Couple c;
-                    c.mot=motLu;
-                    cout<<c.mot;
+                    c.mot = motLu;
+                    cout << c.mot;
                     motLu.clear();
                 }
 
