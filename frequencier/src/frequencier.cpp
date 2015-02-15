@@ -24,6 +24,7 @@ struct Couple {
     string mot;
     int frequence;
 };
+vector <Couple> lesCouples;
 /**
  * Analyser la ligne de commande qui doit être comme suite pour être conforme :
  * freqencier (ou nom de l'exécutable) <nomFichier>
@@ -46,22 +47,8 @@ bool verifierExistanceFicher(const char* nomFichier);
 int main(int argc, char** argv) {
     try {
         vector<Couple> v;
-        Couple c=Couple();
-        c.mot = "test";
-        c.frequence = 12;
-        v.push_back(c);
-        for (vector<Couple>::iterator it=v.begin();it!=v.end(); ++it) {
-           cout<<it->mot;
-           cout<<it->frequence;
-           if(it->mot=="test"){
-               it->frequence++;
-           }
-           cout<<it->frequence;
-           
 
-        }
 
-       
         //traiterLigneCommande(argc, argv);
     } catch (runtime_error& e) {
         cout << e.what() << endl;
@@ -98,9 +85,38 @@ void traiterLigneCommande(int argc, char** argv) {
 
                 } else {
 
-                    Couple c;
-                    c.mot = motLu;
-                    cout << c.mot;
+
+                    if (lesCouples.empty()) {
+                        Couple c;
+                        c.mot = motLu;
+                        c.frequence = 1;
+                        lesCouples.push_back(c);
+                    } else {
+                        bool motDejaPresent = false;
+                        for (vector<Couple>::iterator it = lesCouples.begin();
+                                it != lesCouples.end(); ++it) {
+                            if (it->mot == motLu) {
+                                motDejaPresent = true;
+                                it->frequence++;
+                            }
+
+
+                        }
+                        if (!motDejaPresent) {
+                            //déclare un nouveau couple dans un des cas suivants
+                            //- Si le mot lu n'est pas dans le Vecteur
+                            //- Si c'est le premier mot complet lu
+                            // Question d'éviter de créer un couple
+                            // pour un mot existant
+                            Couple c;
+                            c.mot = motLu;
+                            c.frequence = 1;
+                            lesCouples.push_back(c);
+                        }
+
+                    }
+
+
                     motLu.clear();
                 }
 
@@ -117,3 +133,4 @@ bool verifierExistanceFicher(const char* nom) {
     if (fichier) return true;
     else throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_INEXISTANT + nom);
 }
+
