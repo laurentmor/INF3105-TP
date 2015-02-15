@@ -20,7 +20,7 @@ const string TROP_ARGUMENTS = "trop d'arguments fournis au programme";
 
 struct Couple{
     string mot;
-    int frequence=0;
+    int frequence;
 };
 /**
  * Analyser la ligne de commande qui doit être comme suite pour être conforme :
