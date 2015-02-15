@@ -50,6 +50,11 @@ int main(int argc, char** argv) {
         c.mot = "test";
         c.frequence = 12;
         v.push_back(c);
+        for (vector<Couple>::iterator it=v.begin();it!=v.end(); ++it) {
+           cout<<it->mot; 
+
+        }
+
        
         //traiterLigneCommande(argc, argv);
     } catch (runtime_error& e) {
