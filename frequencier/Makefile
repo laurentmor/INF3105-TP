@@ -6,17 +6,17 @@ BUILDID=$(shell date +%Y%m%d-%H:%M:%S)
 all:clean frequencier commit
 
 commit :
-	git config user.name "AUTO"
-	git config user.email "auto@dummy.ca"
+	@git config user.name "AUTO"
+	@git config user.email "auto@dummy.ca"
 	
-	git add -A .
-	git commit -a -m 'Build automatique - ${BUILDID}'
+	@git add -A .
+	@git commit -a -m 'Build automatique - ${BUILDID}'
 
 
 frequencier:${SRC}/frequencier.cpp
-	g++ ${OPTIONS} -o frequencier ${SRC}/frequencier.cpp
+	@g++ ${OPTIONS} -o frequencier ${SRC}/frequencier.cpp
 clean :
-	rm -rf dist
-	rm -rf build
-	rm -f frequencier* 
+	@rm -rf dist
+	@rm -rf build
+	@rm -f frequencier* 
 	

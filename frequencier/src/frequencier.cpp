@@ -12,6 +12,7 @@
 #include <locale> 
 
 using namespace std;
+
 ifstream fichier;
 const string FICHIER_MANQUANT = "nom du fichier à traiter manquant";
 const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
