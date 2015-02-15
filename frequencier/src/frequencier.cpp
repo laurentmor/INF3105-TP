@@ -51,7 +51,13 @@ int main(int argc, char** argv) {
         c.frequence = 12;
         v.push_back(c);
         for (vector<Couple>::iterator it=v.begin();it!=v.end(); ++it) {
-           cout<<it->mot; 
+           cout<<it->mot;
+           cout<<it->frequence;
+           if(it->mot=="test"){
+               it->frequence++;
+           }
+           cout<<it->frequence;
+           
 
         }
 
