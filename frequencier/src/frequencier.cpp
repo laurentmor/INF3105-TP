@@ -7,6 +7,7 @@
 #include <locale>
 #include <vector>
 #include <cstdlib>
+#include<iomanip>
 /** 
  * File:   frequencier.cpp
  * Author: laurent
@@ -209,7 +210,8 @@ void trierParInsertionMotsCroissants(vector<Couple>& couples) {
 void afficherCouples(vector<Couple>& couples) {
     for (vector<Couple>::iterator it = couples.begin();
             it != couples.end(); ++it) {
-        cout << it->mot << " " << it->frequence << endl;
+        cout <<setw(10)<<right<< it->frequence << " " 
+                <<left<< it->frequence << endl;
     }
 }
 
