@@ -43,6 +43,7 @@ void afficherUsage(const char* nomExecutable);
  * @return TRUE s'il existe 
  */
 bool verifierExistanceFicher(const char* nomFichier);
+void ajouterMot(const string&);
 
 int main(int argc, char** argv) {
     try {
@@ -87,10 +88,7 @@ void traiterLigneCommande(int argc, char** argv) {
 
 
                     if (lesCouples.empty()) {
-                        Couple c;
-                        c.mot = motLu;
-                        c.frequence = 1;
-                        lesCouples.push_back(c);
+                        ajouterMot(motLu);
                     } else {
                         bool motDejaPresent = false;
                         for (vector<Couple>::iterator it = lesCouples.begin();
@@ -108,10 +106,8 @@ void traiterLigneCommande(int argc, char** argv) {
                             //- Si c'est le premier mot complet lu
                             // Question d'éviter de créer un couple
                             // pour un mot existant
-                            Couple c;
-                            c.mot = motLu;
-                            c.frequence = 1;
-                            lesCouples.push_back(c);
+                            ajouterMot(motLu);
+
                         }
 
                     }
@@ -132,5 +128,12 @@ bool verifierExistanceFicher(const char* nom) {
     ifstream fichier(nom);
     if (fichier) return true;
     else throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_INEXISTANT + nom);
+}
+
+void ajouterMot(const string& mot) {
+    Couple c;
+    c.mot = mot;
+    c.frequence = 1;
+    lesCouples.push_back(c);
 }
 
