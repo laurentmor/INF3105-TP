@@ -146,7 +146,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     fichier.open(nomFichier, ios::in);
 
     if (!fichier.is_open()) return lesCouples;
-    if(fichier.tellg()==0) return lesCouples;
+    //if(fichier.tellg()==0) return lesCouples;
     //on procède à la lecture caractère par caractère 
     //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
     //dans la formation d'un mot
