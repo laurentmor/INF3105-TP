@@ -210,7 +210,7 @@ void afficherCouples(vector<Couple>& couples) {
     for (vector<Couple>::iterator it = couples.begin();
             it != couples.end(); ++it) {
         cout << setw(10) << right << it->frequence << " "
-                << left << it->mot << endl;
+                << left << it->mot.size() << endl;
     }
 }
 
@@ -231,7 +231,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
         caractereCourant = fichier.get();
 
         if (isalnum(caractereCourant)) {
-            motLu.push_back((int)caractereCourant);
+            motLu.push_back(caractereCourant);
 
 
         } else {
