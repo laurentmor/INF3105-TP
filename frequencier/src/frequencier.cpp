@@ -198,4 +198,5 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier){
 
 
         }
+        return lesCouples;
 }
