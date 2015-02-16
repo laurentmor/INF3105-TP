@@ -237,9 +237,9 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
         } else {
 
 
-            if (lesCouples.empty()) {
-                ajouterMot(motLu, lesCouples);
-            } else {
+            //if (lesCouples.empty()) {
+              //  ajouterMot(motLu, lesCouples);
+            //} else {
                 bool motDejaPresent = false;
                 for (vector<Couple>::iterator it = lesCouples.begin();
                         it != lesCouples.end(); ++it) {
@@ -260,7 +260,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
 
                 }
 
-            }
+            //}
 
 
             motLu.clear();
