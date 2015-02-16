@@ -11,6 +11,7 @@
 #include <fstream>
 #include <locale>
 #include <vector>
+#include<cstdlib>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ const string FICHIER_MANQUANT = "nom du fichier à traiter manquant";
 const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
 const string TROP_ARGUMENTS = "trop d'arguments fournis au programme";
+const string FICHIER_VIDE = "Fichier vide, rien à afficher";
 
 struct Couple {
     string mot;
@@ -52,30 +54,23 @@ void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
     try {
-        vector<Couple> v;
-        Couple c1, c2, c3, c4;
-        c1.mot = "Pomme";
-        c1.frequence = 2;
-        c2.mot = "Orange";
-        c2.frequence = 12;
-        c3.mot = "Patate";
-        c3.frequence = 10;
-        c4.mot = "kiwi";
-        c4.frequence = 8;
-        v.push_back(c1);
-        v.push_back(c2);
-        v.push_back(c3);
-        v.push_back(c4);
-        trierParInsertion(v);
-        afficherCouples(v);
+        vector<Couple> lesCouples;
+        if (ligneDeCommandeCorrecte(argc, argv)) {
+            lesCouples = creerCouplesAPartirDuFichier(argv[1]);
+        }
+        if (!lesCouples.empty()) {
+            trierParInsertion(lesCouples);
+            afficherCouples(lesCouples);
+        } else {
+            cout << FICHIER_VIDE << endl;
+        }
 
-        //traiterLigneCommande(argc, argv);
     } catch (runtime_error& e) {
         cout << e.what() << endl;
         afficherUsage(argv[0]);
-        return -1;
+        exit(-1);
     }
-    return 0;
+    exit(0);
 }
 
 void afficherUsage(const char* nomExecutable) {
@@ -115,10 +110,10 @@ bool nombreArgumentsCorrect(int argc) {
 }
 
 void trierParInsertion(vector<Couple>& couples) {
-     int j;
+    int j;
     Couple val;
 
-    for ( unsigned int i = 1; i < couples.size(); i++) {
+    for (unsigned int i = 1; i < couples.size(); i++) {
 
         val = couples[i];
         j = i - 1;
@@ -144,59 +139,60 @@ void afficherCouples(vector<Couple>& couples) {
         cout << it->mot << " " << it->frequence << endl;
     }
 }
-vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier){
-    vector<Couple> lesCouples=vector<Couple>();
+
+vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
+    vector<Couple> lesCouples = vector<Couple>();
     ifstream fichier;
-    fichier.open(nomFichier,ios::in);
-    
-        if (!fichier.is_open()) return lesCouples;
-        //on procède à la lecture caractère par caractère 
-        //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
-        //dans la formation d'un mot
-        char caractereCourant;
-        string motLu = "";
-        while (!fichier.eof()) {
-            caractereCourant = fichier.get();
+    fichier.open(nomFichier, ios::in);
 
-            if (isalnum(caractereCourant)) {
-                motLu.push_back(caractereCourant);
+    if (!fichier.is_open()) return lesCouples;
+    //on procède à la lecture caractère par caractère 
+    //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
+    //dans la formation d'un mot
+    char caractereCourant;
+    string motLu = "";
+    while (!fichier.eof()) {
+        caractereCourant = fichier.get();
+
+        if (isalnum(caractereCourant)) {
+            motLu.push_back(caractereCourant);
 
 
+        } else {
+
+
+            if (lesCouples.empty()) {
+                ajouterMot(motLu, lesCouples);
             } else {
-
-
-                if (lesCouples.empty()) {
-                    ajouterMot(motLu,lesCouples);
-                } else {
-                    bool motDejaPresent = false;
-                    for (vector<Couple>::iterator it = lesCouples.begin();
-                            it != lesCouples.end(); ++it) {
-                        if (it->mot == motLu) {
-                            motDejaPresent = true;
-                            it->frequence++;
-                        }
-
-
+                bool motDejaPresent = false;
+                for (vector<Couple>::iterator it = lesCouples.begin();
+                        it != lesCouples.end(); ++it) {
+                    if (it->mot == motLu) {
+                        motDejaPresent = true;
+                        it->frequence++;
                     }
-                    if (!motDejaPresent) {
-                        //déclare un nouveau couple dans un des cas suivants
-                        //- Si le mot lu n'est pas dans le Vecteur
-                        //- Si c'est le premier mot complet lu
-                        // Question d'éviter de créer un couple
-                        // pour un mot existant
-                        ajouterMot(motLu,lesCouples);
 
-                    }
+
+                }
+                if (!motDejaPresent) {
+                    //déclare un nouveau couple dans un des cas suivants
+                    //- Si le mot lu n'est pas dans le Vecteur
+                    //- Si c'est le premier mot complet lu
+                    // Question d'éviter de créer un couple
+                    // pour un mot existant
+                    ajouterMot(motLu, lesCouples);
 
                 }
 
-
-                motLu.clear();
             }
 
 
-
-
+            motLu.clear();
         }
-        return lesCouples;
+
+
+
+
+    }
+    return lesCouples;
 }
