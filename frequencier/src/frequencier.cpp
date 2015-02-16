@@ -146,7 +146,7 @@ bool nombreArgumentsCorrect(int argc) {
 }
 
 void trierParInsertion(vector<Couple>& couples) {
-    int j;
+    unsigned int j;
     Couple val;
 
     for (int i = 1; i < couples.size(); i++) {
