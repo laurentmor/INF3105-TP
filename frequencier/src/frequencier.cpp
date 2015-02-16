@@ -32,6 +32,7 @@ struct Couple {
      * Le nombre de fois où on retrouve le mot dans le texte
      */
     int frequence;
+    void c(){}
 };
 
 
