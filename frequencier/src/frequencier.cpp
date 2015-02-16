@@ -119,7 +119,7 @@ void trierParInsertion(vector<Couple>& couples) {
         j = i - 1;
 
 
-        while (j >= 0 && couples[j].frequence > val.frequence) {
+        while (j >= 0 && couples[j].frequence < val.frequence) {
 
             couples[j + 1] = couples[j];
 
