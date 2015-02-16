@@ -84,7 +84,12 @@ void ajouterMot(const string&, vector<Couple>&);
  * Trier un vecteur donné par ordre de fréquence décroissante
  * @param le vecteur à trier
  */
-void trierParInsertion(vector<Couple>&);
+void trierParInsertionFrequencesDecroissante(vector<Couple>&);
+/**
+ * Trier un vecteur donné par ordre de mots croissants
+ * @param le vecteur à trier
+ */
+void trierParInsertionMotsCroissants(vector<Couple>&);
 /*
  * Afficher les résultats formatés
  * 
@@ -93,13 +98,17 @@ void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
     try {
-        vector<Couple> lesCouples;
+        vector<Couple> lesCouples,lesCouplesTri1,lesCouplesTri2 ;
         if (ligneDeCommandeCorrecte(argc, argv)) {
             lesCouples = creerCouplesAPartirDuFichier(argv[1]);
         }
         if (!lesCouples.empty()) {
-            trierParInsertion(lesCouples);
-            afficherCouples(lesCouples);
+            lesCouplesTri1=lesCouples;
+            lesCouplesTri2=lesCouples;
+            trierParInsertionFrequencesDecroissante(lesCouplesTri1);
+             afficherCouples(lesCouplesTri1);
+            trierParInsertionMotsCroissants(lesCouplesTri2);
+            afficherCouples(lesCouplesTri2);
         } else {
             cout << FICHIER_VIDE << endl;
         }
@@ -148,7 +157,7 @@ bool nombreArgumentsCorrect(int argc) {
     } else return true;
 }
 
-void trierParInsertion(vector<Couple>& couples) {
+void trierParInsertionFrequencesDecroissante(vector<Couple>& couples) {
     int j;
     Couple val;
 
@@ -171,6 +180,31 @@ void trierParInsertion(vector<Couple>& couples) {
     }
 
 }
+
+void trierParInsertionMotsCroissants(vector<Couple>& couples) {
+    int j;
+    Couple val;
+
+    for (unsigned int i = 1; i < couples.size(); i++) {
+
+        val = couples[i];
+        j = i - 1;
+
+
+        while (j >= 0 && couples[j].mot > val.mot) {
+
+            couples[j + 1] = couples[j];
+
+            j = j - 1;
+
+        }
+
+        couples[j + 1] = val;
+
+    }
+
+}
+
 
 void afficherCouples(vector<Couple>& couples) {
     for (vector<Couple>::iterator it = couples.begin();
