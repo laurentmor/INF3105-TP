@@ -231,7 +231,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
         caractereCourant = fichier.get();
 
         if (isalnum(caractereCourant)) {
-            motLu.push_back(caractereCourant);
+            motLu.push_back((int)caractereCourant);
 
 
         } else {
