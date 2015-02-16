@@ -146,6 +146,27 @@ bool nombreArgumentsCorrect(int argc) {
 }
 
 void trierParInsertion(vector<Couple>& couples) {
+    int j;
+    Couple val;
+
+    for (int i = 1; i < couples.size(); i++) {
+
+        val = couples[i];
+        j = i - 1;
+
+
+        while (j >= 0 && couples[j].frequence > val.frequence) {
+
+            couples[j + 1] = couples[j];
+
+            j = j - 1;
+
+        }
+
+        couples[j + 1] = val;
+
+    }
+
 }
 
 void afficherCouples(const vector<Couple>& couples) {
