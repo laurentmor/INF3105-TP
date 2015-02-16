@@ -169,7 +169,7 @@ void trierParInsertionFrequencesDecroissante(vector<Couple>& couples) {
 
 
         while (j >= 0 && couples[j].frequence < val.frequence
-                &&couples[j].mot > val.mot) {
+                ||couples[j].mot > val.mot) {
 
             couples[j + 1] = couples[j];
 
