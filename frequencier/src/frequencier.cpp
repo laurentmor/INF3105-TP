@@ -16,7 +16,9 @@
 
 using namespace std;
 
-
+/**
+ * Les différents messages
+ */
 const string FICHIER_MANQUANT = "nom du fichier à traiter manquant";
 const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
@@ -32,7 +34,7 @@ struct Couple {
      * Le nombre de fois où on retrouve le mot dans le texte
      */
     int frequence;
-    void c(){}
+    
 };
 
 
@@ -65,10 +67,11 @@ bool nombreArgumentsCorrect(int);
  */
 bool ligneDeCommandeCorrecte(int, char**);
 /**
- * - Lit le fichier passé en paramètre à la ligne de commande
- * - Retourne l'ensemble des couples (mot, fréquence)
+ * - Lire le fichier passé en paramètre à la ligne de commande
+ * - Retourner l'ensemble des couples (mot, fréquence)
  * @param le nom du fichier à traiter 
  * @return un vecteur de couples
+ * 
  */
 vector<Couple> creerCouplesAPartirDuFichier(const char*);
 /**
@@ -102,7 +105,7 @@ int main(int argc, char** argv) {
         }
 
     } catch (runtime_error& e) {
-        cout << e.what() << endl;
+        cout <<argv[0]<<" "<< e.what() << endl;
         afficherUsage(argv[0]);
         exit(-1);
     }
