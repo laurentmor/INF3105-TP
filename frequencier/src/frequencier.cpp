@@ -35,7 +35,7 @@ struct Couple {
      * Le nombre de fois où on retrouve le mot dans le texte
      */
     int frequence;
-    
+
 };
 
 
@@ -99,15 +99,15 @@ void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
     try {
-        vector<Couple> lesCouples,lesCouplesTri1,lesCouplesTri2 ;
+        vector<Couple> lesCouples, lesCouplesTri1, lesCouplesTri2;
         if (ligneDeCommandeCorrecte(argc, argv)) {
             lesCouples = creerCouplesAPartirDuFichier(argv[1]);
         }
         if (!lesCouples.empty()) {
-            lesCouplesTri1=lesCouples;
-            lesCouplesTri2=lesCouples;
+            lesCouplesTri1 = lesCouples;
+            lesCouplesTri2 = lesCouples;
             trierParInsertionFrequencesDecroissante(lesCouplesTri1);
-             afficherCouples(lesCouplesTri1);
+            afficherCouples(lesCouplesTri1);
             //trierParInsertionMotsCroissants(lesCouplesTri2);
             //afficherCouples(lesCouplesTri2);
         } else {
@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
         }
 
     } catch (runtime_error& e) {
-        cout <<argv[0]<<" "<< e.what() << endl;
+        cout << argv[0] << " " << e.what() << endl;
         afficherUsage(argv[0]);
         exit(-1);
     }
@@ -168,8 +168,7 @@ void trierParInsertionFrequencesDecroissante(vector<Couple>& couples) {
         j = i - 1;
 
 
-        while (j >= 0 && (couples[j].frequence < val.frequence
-                ||couples[j].mot > val.mot)) {
+        while (j >= 0 && couples[j].frequence < val.frequence) {
 
             couples[j + 1] = couples[j];
 
@@ -207,12 +206,11 @@ void trierParInsertionMotsCroissants(vector<Couple>& couples) {
 
 }
 
-
 void afficherCouples(vector<Couple>& couples) {
     for (vector<Couple>::iterator it = couples.begin();
             it != couples.end(); ++it) {
-        cout <<setw(10)<<right<< it->frequence << " " 
-                <<left<< it->mot << endl;
+        cout << setw(10) << right << it->frequence << " "
+                << left << it->mot << endl;
     }
 }
 
@@ -222,13 +220,13 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     fichier.open(nomFichier, ios::in);
 
     if (!fichier.is_open()) return lesCouples;
-    
+
     //on procède à la lecture caractère par caractère 
     //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
     //dans la formation d'un mot
     char caractereCourant;
     string motLu = "";
-    
+
     while (!fichier.eof()) {
         caractereCourant = fichier.get();
 
