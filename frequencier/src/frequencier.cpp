@@ -51,6 +51,19 @@ void afficherCouples(vector<Couple>&);
 int main(int argc, char** argv) {
     try {
         vector<Couple> v;
+        Couple c1,c2,c3,c4;
+        c1.mot="Pomme";
+        c1.frequence=2;
+        c2.mot="Orange";
+        c2.frequence=12;
+        c3.mot="Patate";
+        c3.frequence=10;
+        c4.mot="kiwi";
+        c4.frequence=8;
+        v.push_back(c1);
+        v.push_back(c2);
+        v.push_back(c3);
+        v.push_back(c4);
         trierParInsertion(v);
         afficherCouples(v);
 
