@@ -14,7 +14,7 @@
 
 using namespace std;
 
-ifstream fichier;
+
 const string FICHIER_MANQUANT = "nom du fichier à traiter manquant";
 const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
@@ -44,22 +44,24 @@ void afficherUsage(const char* nomExecutable);
  */
 bool verifierExistanceFicher(const char* nomFichier);
 bool nombreArgumentsCorrect(int);
-void ajouterMot(const string&);
+bool ligneDeCommandeCorrecte(int, char**);
+vector<Couple> creerCouplesAPartirDuFichier(const char*);
+void ajouterMot(const string&, vector<Couple>&);
 void trierParInsertion(vector<Couple>&);
 void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
     try {
         vector<Couple> v;
-        Couple c1,c2,c3,c4;
-        c1.mot="Pomme";
-        c1.frequence=2;
-        c2.mot="Orange";
-        c2.frequence=12;
-        c3.mot="Patate";
-        c3.frequence=10;
-        c4.mot="kiwi";
-        c4.frequence=8;
+        Couple c1, c2, c3, c4;
+        c1.mot = "Pomme";
+        c1.frequence = 2;
+        c2.mot = "Orange";
+        c2.frequence = 12;
+        c3.mot = "Patate";
+        c3.frequence = 10;
+        c4.mot = "kiwi";
+        c4.frequence = 8;
         v.push_back(c1);
         v.push_back(c2);
         v.push_back(c3);
@@ -80,61 +82,15 @@ void afficherUsage(const char* nomExecutable) {
     cout << "Usage: " << nomExecutable << " <fichier>" << endl;
 }
 
-void traiterLigneCommande(int argc, char** argv) {
+bool ligneDeCommandeCorrecte(int argc, char** argv) {
 
     if (nombreArgumentsCorrect(argc) && verifierExistanceFicher(argv[1])) {
-
-        fichier.open(argv[1], ios::in);
-        if (!fichier.is_open()) return;
-        //on procède à la lecture caractère par caractère 
-        //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
-        //dans la formation d'un mot
-        char caractereCourant;
-        string motLu = "";
-        while (!fichier.eof()) {
-            caractereCourant = fichier.get();
-
-            if (isalnum(caractereCourant)) {
-                motLu.push_back(caractereCourant);
-
-
-            } else {
-
-
-                if (lesCouples.empty()) {
-                    ajouterMot(motLu);
-                } else {
-                    bool motDejaPresent = false;
-                    for (vector<Couple>::iterator it = lesCouples.begin();
-                            it != lesCouples.end(); ++it) {
-                        if (it->mot == motLu) {
-                            motDejaPresent = true;
-                            it->frequence++;
-                        }
-
-
-                    }
-                    if (!motDejaPresent) {
-                        //déclare un nouveau couple dans un des cas suivants
-                        //- Si le mot lu n'est pas dans le Vecteur
-                        //- Si c'est le premier mot complet lu
-                        // Question d'éviter de créer un couple
-                        // pour un mot existant
-                        ajouterMot(motLu);
-
-                    }
-
-                }
-
-
-                motLu.clear();
-            }
-
-
-
-
-        }
+        return true;
     }
+    return false;
+
+
+
 }
 
 bool verifierExistanceFicher(const char* nom) {
@@ -143,11 +99,11 @@ bool verifierExistanceFicher(const char* nom) {
     else throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_INEXISTANT + nom);
 }
 
-void ajouterMot(const string& mot) {
+void ajouterMot(const string& mot, vector<Couple>& vc) {
     Couple c;
     c.mot = mot;
     c.frequence = 1;
-    lesCouples.push_back(c);
+    vc.push_back(c);
 }
 
 bool nombreArgumentsCorrect(int argc) {
@@ -182,9 +138,64 @@ void trierParInsertion(vector<Couple>& couples) {
 
 }
 
-void afficherCouples( vector<Couple>& couples) {
-    for ( vector<Couple>::iterator it = couples.begin();
+void afficherCouples(vector<Couple>& couples) {
+    for (vector<Couple>::iterator it = couples.begin();
             it != couples.end(); ++it) {
-        cout<<it->mot<<" "<<it->frequence<<endl;
+        cout << it->mot << " " << it->frequence << endl;
     }
+}
+vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier){
+    vector<Couple> lesCouples=vector<Couple>();
+    ifstream fichier;
+    fichier.open(nomFichier,ios::in);
+    
+        if (!fichier.is_open()) return lesCouples;
+        //on procède à la lecture caractère par caractère 
+        //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
+        //dans la formation d'un mot
+        char caractereCourant;
+        string motLu = "";
+        while (!fichier.eof()) {
+            caractereCourant = fichier.get();
+
+            if (isalnum(caractereCourant)) {
+                motLu.push_back(caractereCourant);
+
+
+            } else {
+
+
+                if (lesCouples.empty()) {
+                    ajouterMot(motLu,lesCouples);
+                } else {
+                    bool motDejaPresent = false;
+                    for (vector<Couple>::iterator it = lesCouples.begin();
+                            it != lesCouples.end(); ++it) {
+                        if (it->mot == motLu) {
+                            motDejaPresent = true;
+                            it->frequence++;
+                        }
+
+
+                    }
+                    if (!motDejaPresent) {
+                        //déclare un nouveau couple dans un des cas suivants
+                        //- Si le mot lu n'est pas dans le Vecteur
+                        //- Si c'est le premier mot complet lu
+                        // Question d'éviter de créer un couple
+                        // pour un mot existant
+                        ajouterMot(motLu,lesCouples);
+
+                    }
+
+                }
+
+
+                motLu.clear();
+            }
+
+
+
+
+        }
 }
