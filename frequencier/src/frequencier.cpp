@@ -46,7 +46,7 @@ bool verifierExistanceFicher(const char* nomFichier);
 bool nombreArgumentsCorrect(int);
 void ajouterMot(const string&);
 void trierParInsertion(vector<Couple>&);
-void afficherCouples(const vector<Couple>&);
+void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
     try {
@@ -169,5 +169,9 @@ void trierParInsertion(vector<Couple>& couples) {
 
 }
 
-void afficherCouples(const vector<Couple>& couples) {
+void afficherCouples( vector<Couple>& couples) {
+    for ( vector<Couple>::iterator it = couples.begin();
+            it != couples.end(); ++it) {
+        cout<<it->mot<<" "<<it->frequence<<endl;
+    }
 }
