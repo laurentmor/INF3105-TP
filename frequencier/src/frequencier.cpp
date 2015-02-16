@@ -43,13 +43,16 @@ void afficherUsage(const char* nomExecutable);
  * @return TRUE s'il existe 
  */
 bool verifierExistanceFicher(const char* nomFichier);
-bool nombreArgumentsCorrect(int );
+bool nombreArgumentsCorrect(int);
 void ajouterMot(const string&);
+void trierParInsertion(vector<Couple>&);
+void afficherCouples(const vector<Couple>&);
 
 int main(int argc, char** argv) {
     try {
         vector<Couple> v;
-
+        trierParInsertion(v);
+        afficherCouples(v);
 
         //traiterLigneCommande(argc, argv);
     } catch (runtime_error& e) {
@@ -65,62 +68,61 @@ void afficherUsage(const char* nomExecutable) {
 }
 
 void traiterLigneCommande(int argc, char** argv) {
-    
-      if (nombreArgumentsCorrect(argc)&& verifierExistanceFicher(argv[1])) {
 
-            fichier.open(argv[1], ios::in);
-            if (!fichier.is_open()) return;
-            //on procède à la lecture caractère par caractère 
-            //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
-            //dans la formation d'un mot
-            char caractereCourant;
-            string motLu = "";
-            while (!fichier.eof()) {
-                caractereCourant = fichier.get();
+    if (nombreArgumentsCorrect(argc) && verifierExistanceFicher(argv[1])) {
 
-                if (isalnum(caractereCourant)) {
-                    motLu.push_back(caractereCourant);
+        fichier.open(argv[1], ios::in);
+        if (!fichier.is_open()) return;
+        //on procède à la lecture caractère par caractère 
+        //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
+        //dans la formation d'un mot
+        char caractereCourant;
+        string motLu = "";
+        while (!fichier.eof()) {
+            caractereCourant = fichier.get();
+
+            if (isalnum(caractereCourant)) {
+                motLu.push_back(caractereCourant);
 
 
+            } else {
+
+
+                if (lesCouples.empty()) {
+                    ajouterMot(motLu);
                 } else {
+                    bool motDejaPresent = false;
+                    for (vector<Couple>::iterator it = lesCouples.begin();
+                            it != lesCouples.end(); ++it) {
+                        if (it->mot == motLu) {
+                            motDejaPresent = true;
+                            it->frequence++;
+                        }
 
 
-                    if (lesCouples.empty()) {
+                    }
+                    if (!motDejaPresent) {
+                        //déclare un nouveau couple dans un des cas suivants
+                        //- Si le mot lu n'est pas dans le Vecteur
+                        //- Si c'est le premier mot complet lu
+                        // Question d'éviter de créer un couple
+                        // pour un mot existant
                         ajouterMot(motLu);
-                    } else {
-                        bool motDejaPresent = false;
-                        for (vector<Couple>::iterator it = lesCouples.begin();
-                                it != lesCouples.end(); ++it) {
-                            if (it->mot == motLu) {
-                                motDejaPresent = true;
-                                it->frequence++;
-                            }
-
-
-                        }
-                        if (!motDejaPresent) {
-                            //déclare un nouveau couple dans un des cas suivants
-                            //- Si le mot lu n'est pas dans le Vecteur
-                            //- Si c'est le premier mot complet lu
-                            // Question d'éviter de créer un couple
-                            // pour un mot existant
-                            ajouterMot(motLu);
-
-                        }
 
                     }
 
-
-                    motLu.clear();
                 }
 
 
-
-
+                motLu.clear();
             }
+
+
+
+
         }
     }
-
+}
 
 bool verifierExistanceFicher(const char* nom) {
     ifstream fichier(nom);
@@ -135,11 +137,16 @@ void ajouterMot(const string& mot) {
     lesCouples.push_back(c);
 }
 
-bool nombreArgumentsCorrect(int argc){
-if (argc < 2)throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_MANQUANT);
+bool nombreArgumentsCorrect(int argc) {
+    if (argc < 2)throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_MANQUANT);
     else
         if (argc > 2) {
-            throw runtime_error(NIVEAU_EXCEPTION_ERREUR + TROP_ARGUMENTS);
-        }
-        else return true;
-    }
+        throw runtime_error(NIVEAU_EXCEPTION_ERREUR + TROP_ARGUMENTS);
+    } else return true;
+}
+
+void trierParInsertion(vector<Couple>& couples) {
+}
+
+void afficherCouples(const vector<Couple>& couples) {
+}
