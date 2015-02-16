@@ -1,9 +1,4 @@
-/** 
- * File:   frequencier.cpp
- * Author: laurent
- *
- * Created on 8 février 2015, 14:42
- */
+
 
 #include <iostream>
 #include <stdexcept>
@@ -12,6 +7,12 @@
 #include <locale>
 #include <vector>
 #include <cstdlib>
+/** 
+ * File:   frequencier.cpp
+ * Author: laurent
+ *
+ * Created on 8 février 2015, 14:42
+ */
 
 using namespace std;
 
@@ -23,7 +24,13 @@ const string TROP_ARGUMENTS = "trop d'arguments fournis au programme";
 const string FICHIER_VIDE = "Fichier vide, rien à afficher";
 
 struct Couple {
+    /**
+     * Le mot dans le texte
+     */
     string mot;
+    /**
+     * Le nombre de fois où on retrouve le mot dans le texte
+     */
     int frequence;
 };
 
