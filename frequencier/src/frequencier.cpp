@@ -1,4 +1,4 @@
-/* 
+/** 
  * File:   frequencier.cpp
  * Author: laurent
  *
@@ -11,7 +11,7 @@
 #include <fstream>
 #include <locale>
 #include <vector>
-#include<cstdlib>
+#include <cstdlib>
 
 using namespace std;
 
@@ -27,13 +27,7 @@ struct Couple {
     int frequence;
 };
 
-/**
- * Analyser la ligne de commande qui doit être comme suite pour être conforme :
- * freqencier (ou nom de l'exécutable) <nomFichier>
- * @param argc nombre d'arguments
- * @param argv les arguments à traiter
- */
-void traiterLigneCommande(int argc, char** argv);
+
 /**
  * Afficher la manière d'utiliser le programme
  * @param nomExecutable le nom de l'exécutable à utiliser lors de l'appel
@@ -45,11 +39,45 @@ void afficherUsage(const char* nomExecutable);
  * @return TRUE s'il existe 
  */
 bool verifierExistanceFicher(const char* nomFichier);
+/**
+ * Sert à déterminer si le nombre d'arguments passés en ligne de commande 
+ * est correct.
+ * @param le nombre d'arguments
+ * @return TRUE si c'est correct
+ */
 bool nombreArgumentsCorrect(int);
+/**
+ * sert à déterminer si toutes les conditions sont remplies pour continuer
+ * le traitement :
+ * 1- Le nombre de paramètres est correct
+ * 2- Le fichier fourni en paramètre est existant sur le disque
+ * @param le nombre de paramètres
+ * @param le nom du fichier à vérifier
+ * @return TRUE si si la ligne de commande est bien formée
+ */
 bool ligneDeCommandeCorrecte(int, char**);
+/**
+ * - Lit le fichier passé en paramètre à la ligne de commande
+ * - Retourne l'ensemble des couples (mot, fréquence)
+ * @param le nom du fichier à traiter 
+ * @return un vecteur de couples
+ */
 vector<Couple> creerCouplesAPartirDuFichier(const char*);
+/**
+ * Ajouter un mot à la liste des couples
+ * @param le mot à ajouter
+ * @param le vecteur où l'ajouter 
+ */
 void ajouterMot(const string&, vector<Couple>&);
+/**
+ * Trier un vecteur donné par ordre de fréquence décroissante
+ * @param le vecteur à trier
+ */
 void trierParInsertion(vector<Couple>&);
+/*
+ * Afficher les résultats formatés
+ * 
+ **/
 void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
@@ -146,7 +174,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     fichier.open(nomFichier, ios::in);
 
     if (!fichier.is_open()) return lesCouples;
-    //if(fichier.tellg()==0) return lesCouples;
+    
     //on procède à la lecture caractère par caractère 
     //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
     //dans la formation d'un mot
