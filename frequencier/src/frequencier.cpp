@@ -211,7 +211,7 @@ void afficherCouples(vector<Couple>& couples) {
     for (vector<Couple>::iterator it = couples.begin();
             it != couples.end(); ++it) {
         cout <<setw(10)<<right<< it->frequence << " " 
-                <<left<< it->frequence << endl;
+                <<left<< it->mot << endl;
     }
 }
 
