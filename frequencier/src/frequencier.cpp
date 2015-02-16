@@ -43,6 +43,7 @@ void afficherUsage(const char* nomExecutable);
  * @return TRUE s'il existe 
  */
 bool verifierExistanceFicher(const char* nomFichier);
+bool nombreArgumentsCorrect(int );
 void ajouterMot(const string&);
 
 int main(int argc, char** argv) {
@@ -64,11 +65,8 @@ void afficherUsage(const char* nomExecutable) {
 }
 
 void traiterLigneCommande(int argc, char** argv) {
-    if (argc < 2)throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_MANQUANT);
-    else {
-        if (argc > 2) {
-            throw runtime_error(NIVEAU_EXCEPTION_ERREUR + TROP_ARGUMENTS);
-        } else if (verifierExistanceFicher(argv[1])) {
+    
+      if (nombreArgumentsCorrect(argc)&& verifierExistanceFicher(argv[1])) {
 
             fichier.open(argv[1], ios::in);
             if (!fichier.is_open()) return;
@@ -122,7 +120,7 @@ void traiterLigneCommande(int argc, char** argv) {
             }
         }
     }
-}
+
 
 bool verifierExistanceFicher(const char* nom) {
     ifstream fichier(nom);
@@ -137,3 +135,11 @@ void ajouterMot(const string& mot) {
     lesCouples.push_back(c);
 }
 
+bool nombreArgumentsCorrect(int argc){
+if (argc < 2)throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_MANQUANT);
+    else
+        if (argc > 2) {
+            throw runtime_error(NIVEAU_EXCEPTION_ERREUR + TROP_ARGUMENTS);
+        }
+        else return true;
+    }
