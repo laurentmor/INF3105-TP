@@ -26,7 +26,7 @@ struct Couple {
     string mot;
     int frequence;
 };
-vector <Couple> lesCouples;
+
 /**
  * Analyser la ligne de commande qui doit être comme suite pour être conforme :
  * freqencier (ou nom de l'exécutable) <nomFichier>
