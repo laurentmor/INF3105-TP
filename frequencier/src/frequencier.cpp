@@ -149,7 +149,7 @@ void trierParInsertion(vector<Couple>& couples) {
     unsigned int j;
     Couple val;
 
-    for (int i = 1; i < couples.size(); i++) {
+    for (unsigned int i = 1; i < couples.size(); i++) {
 
         val = couples[i];
         j = i - 1;
