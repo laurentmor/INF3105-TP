@@ -210,7 +210,7 @@ void afficherCouples(vector<Couple>& couples) {
     for (vector<Couple>::iterator it = couples.begin();
             it != couples.end(); ++it) {
         cout << setw(10) << right << it->frequence << " "
-                << left << it->mot.size() << endl;
+                << left << it->mot << endl;
     }
 }
 
@@ -225,7 +225,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
     //dans la formation d'un mot
     char caractereCourant;
-    string motLu = "";
+    string motLu ;
 
     while (!fichier.eof()) {
         caractereCourant = fichier.get();
@@ -237,9 +237,9 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
         } else {
 
 
-            //if (lesCouples.empty()) {
-              //  ajouterMot(motLu, lesCouples);
-            //} else {
+            if (lesCouples.empty()&&motLu.size()>0) {
+                ajouterMot(motLu, lesCouples);
+            } else if(motLu.size()>0){
                 bool motDejaPresent = false;
                 for (vector<Couple>::iterator it = lesCouples.begin();
                         it != lesCouples.end(); ++it) {
@@ -260,7 +260,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
 
                 }
 
-            //}
+            }
 
 
             motLu.clear();
