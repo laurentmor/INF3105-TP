@@ -20,15 +20,14 @@ using namespace std;
 /**
  * Les différents messages
  */
-const string FICHIER_MANQUANT = "nom du fichier à traiter manquant";
+const string FICHIER_MANQUANT( "nom du fichier à traiter manquant");
 const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
 const string TROP_ARGUMENTS = "trop d\'arguments fournis au programme";
 const string FICHIER_VIDE = "Fichier vide, rien \340 afficher";
 const string OUVERTURE_IMPOSSIBLE = "impossible d'ouvrir le fichier: ";
-const string VERIFIER="V\351rifiez que vous disposez";
-const string PERMISSIONS=" des permissions requises sur le fichier";
-
+const string VERIFIER = "V\351rifiez que vous disposez";
+const string PERMISSIONS = " des permissions requises sur le fichier";
 
 struct Couple {
     /**
@@ -105,6 +104,9 @@ void appliquerLesTris(vector<Couple>&);
 void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
+    ios_base::sync_with_stdio(false);
+    wcin.imbue(locale("en_US.UTF-8"));
+    wcout.imbue(locale("en_US.UTF-8"));
     try {
         vector<Couple> lesCouples;
         if (ligneDeCommandeCorrecte(argc, argv)) {
@@ -122,9 +124,9 @@ int main(int argc, char** argv) {
         wcout << argv[0] << " " << e.what() << endl;
         afficherUsage(argv[0]);
         exit(-1);
-    }    catch (ifstream::failure fail) {
-         //wcout << argv[0] << " " <<L fail.what() << endl;
-         cout <<VERIFIER<<PERMISSIONS<<endl;
+    } catch (ifstream::failure fail) {
+        //wcout << argv[0] << " " <<L fail.what() << endl;
+        cout << VERIFIER << PERMISSIONS << endl;
     }
     exit(0);
 }
