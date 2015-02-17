@@ -210,8 +210,9 @@ void trierParMots(vector<Couple>& couples) {
 }
 
 void appliquerLesTris(vector<Couple>& vecteurATrier) {
-   trierParFrequencesDecroissante(vecteurATrier);
    trierParMots(vecteurATrier);
+    trierParFrequencesDecroissante(vecteurATrier);
+   
 }
 
 void afficherCouples(vector<Couple>& couples) {
