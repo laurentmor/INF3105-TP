@@ -169,7 +169,7 @@ vector<Couple> trierParFrequencesDecroissante(vector<Couple>& couples) {
         j = i - 1;
 
 
-        while (j >= 0 && couples[j].frequence < val.frequence) {
+        while (j >= 0 && couples[j].frequence > val.frequence) {
 
             couples[j + 1] = couples[j];
 
@@ -194,7 +194,7 @@ vector<Couple> trierParMots(vector<Couple>& couples) {
         j = i - 1;
 
 
-        while (j >= 0 && couples[j].mot > val.mot) {
+        while (j >= 0 && couples[j].mot < val.mot) {
 
             couples[j + 1] = couples[j];
 
