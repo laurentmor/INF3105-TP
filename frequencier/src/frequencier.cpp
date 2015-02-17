@@ -288,7 +288,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     vector<Couple> lesCouples = vector<Couple>();
     ifstream fichier;
     fichier.open(nomFichier, ios::in);
-    fichier.close();
+    
     if (!fichier.is_open()) throw ifstream::failure(NIVEAU_EXCEPTION_ERREUR +
             OUVERTURE_IMPOSSIBLE + nomFichier);
 
