@@ -227,8 +227,8 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     vector<Couple> lesCouples = vector<Couple>();
     ifstream fichier;
     fichier.open(nomFichier, ios::in);
-
-    if (!fichier.is_open()) return lesCouples;
+    fichier.close(); 
+    if (!fichier.is_open()) throw ifstream::failure("test");
 
     //on procède à la lecture caractère par caractère 
     //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
@@ -245,10 +245,13 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
 
         } else {
 
-
+            //Si le mot est le premier mot et que ce n'est pas un mot vide,
+            //On l'ajoute directement.
             if (lesCouples.empty() && motLu.size() > 0) {
                 ajouterMot(motLu, lesCouples);
-            } else if (motLu.size() > 0) {
+            }//S'il ne s'agit pas du premier mot, on le recherche et met à jour
+             //la fréquence. 
+            else if (motLu.size() > 0) {
                 bool motDejaPresent = false;
                 for (vector<Couple>::iterator it = lesCouples.begin();
                         it != lesCouples.end(); ++it) {
@@ -259,19 +262,16 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
 
 
                 }
+                //Si le mot n'est pas trouvé, on l'ajoute
                 if (!motDejaPresent) {
-                    //déclare un nouveau couple dans un des cas suivants
-                    //- Si le mot lu n'est pas dans le Vecteur
-                    //- Si c'est le premier mot complet lu
-                    // Question d'éviter de créer un couple
-                    // pour un mot existant
+                    
                     ajouterMot(motLu, lesCouples);
 
                 }
 
             }
 
-
+            // On "nettoie" le mot pour continuer la lecture du prochain mot 
             motLu.clear();
         }
 
