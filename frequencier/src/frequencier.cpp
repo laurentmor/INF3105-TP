@@ -37,10 +37,7 @@ struct Couple {
     int frequence;
 
 };
-enum TypeDeTri{
-    FREQ=0,
-    MOT=1
-};
+
 
 
 /**
@@ -89,12 +86,14 @@ void ajouterMot(const string&, vector<Couple>&);
  * Trier un vecteur donné par ordre de fréquence décroissante
  * @param le vecteur à trier
  */
-void trierParInsertionFrequencesDecroissante(vector<Couple>&);
+void trierParFrequencesDecroissante(vector<Couple>&);
 /**
  * Trier un vecteur donné par ordre de mots croissants
  * @param le vecteur à trier
  */
-void trierParInsertion(vector<Couple>&);
+void trierParMots(vector<Couple>&);
+
+void appliquerLesTris(vector<Couple>&);
 /*
  * Afficher les résultats formatés
  * 
@@ -108,7 +107,7 @@ int main(int argc, char** argv) {
             lesCouples = creerCouplesAPartirDuFichier(argv[1]);
         }
         if (!lesCouples.empty()) {
-            trierParInsertion(lesCouples);
+            appliquerLesTris(lesCouples);
             afficherCouples(lesCouples);
             
         } else {
@@ -160,7 +159,7 @@ bool nombreArgumentsCorrect(int argc) {
     } else return true;
 }
 
-void trierParInsertion(vector<Couple>& couples) {
+void trierParFrequencesDecroissante(vector<Couple>& couples) {
     int j;
     Couple val;
 
@@ -178,13 +177,6 @@ void trierParInsertion(vector<Couple>& couples) {
 
         }
         
-        while (j >= 0 && couples[j].mot > val.mot) {
-
-            couples[j + 1] = couples[j];
-
-            j = j - 1;
-
-        }
 
         couples[j + 1] = val;
 
@@ -192,6 +184,34 @@ void trierParInsertion(vector<Couple>& couples) {
 
 }
 
+void trierParMots(vector<Couple>& couples) {
+    int j;
+    Couple val;
+
+    for (unsigned int i = 1; i < couples.size(); i++) {
+
+        val = couples[i];
+        j = i - 1;
+
+
+        while (j >= 0 && couples[j].mot > val.mot) {
+
+            couples[j + 1] = couples[j];
+
+            j = j - 1;
+
+        }
+        
+
+        couples[j + 1] = val;
+
+    }
+
+}
+void appliquerLesTris(vector<Couple>& vecteurATrier){
+    trierParFrequencesDecroissante(vecteurATrier);
+    trierParMots(vecteurATrier);
+}
 
 void afficherCouples(vector<Couple>& couples) {
     for (vector<Couple>::iterator it = couples.begin();
