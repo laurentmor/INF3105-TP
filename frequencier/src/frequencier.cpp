@@ -278,7 +278,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
 
 
     }
-    cout<<caractereCourant;
+  
     fichier.close();
     return lesCouples;
 }
