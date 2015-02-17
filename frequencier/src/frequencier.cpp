@@ -119,11 +119,11 @@ int main(int argc, char** argv) {
         }
 
     } catch (runtime_error& e) {
-        cout << argv[0] << " " << e.what() << endl;
+        wcout << argv[0] << " " << e.what() << endl;
         afficherUsage(argv[0]);
         exit(-1);
     }    catch (ifstream::failure fail) {
-         wcout << argv[0] << " " << fail.what() << endl;
+         //wcout << argv[0] << " " <<L fail.what() << endl;
          cout <<VERIFIER<<PERMISSIONS<<endl;
     }
     exit(0);
