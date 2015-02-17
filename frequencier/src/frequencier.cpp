@@ -86,12 +86,12 @@ void ajouterMot(const string&, vector<Couple>&);
  * Trier un vecteur donné par ordre de fréquence décroissante
  * @param le vecteur à trier
  */
-void trierParFrequencesDecroissante(vector<Couple>&);
+vector<Couple> trierParFrequencesDecroissante(vector<Couple>&);
 /**
  * Trier un vecteur donné par ordre de mots croissants
  * @param le vecteur à trier
  */
-void trierParMots(vector<Couple>&);
+vector<Couple> trierParMots(vector<Couple>&);
 
 void appliquerLesTris(vector<Couple>&);
 /*
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
         if (!lesCouples.empty()) {
             appliquerLesTris(lesCouples);
             afficherCouples(lesCouples);
-            
+
         } else {
             cout << FICHIER_VIDE << endl;
         }
@@ -140,7 +140,7 @@ bool ligneDeCommandeCorrecte(int argc, char** argv) {
 bool verifierExistanceFicher(const char* nom) {
     ifstream fichier(nom);
     if (fichier) return true;
-    else throw runtime_error(NIVEAU_EXCEPTION_ERREUR + 
+    else throw runtime_error(NIVEAU_EXCEPTION_ERREUR +
             FICHIER_INEXISTANT + nom);
 }
 
@@ -159,7 +159,7 @@ bool nombreArgumentsCorrect(int argc) {
     } else return true;
 }
 
-void trierParFrequencesDecroissante(vector<Couple>& couples) {
+vector<Couple> trierParFrequencesDecroissante(vector<Couple>& couples) {
     int j;
     Couple val;
 
@@ -176,15 +176,15 @@ void trierParFrequencesDecroissante(vector<Couple>& couples) {
             j = j - 1;
 
         }
-        
+
 
         couples[j + 1] = val;
 
     }
-
+    return couples;
 }
 
-void trierParMots(vector<Couple>& couples) {
+vector<Couple> trierParMots(vector<Couple>& couples) {
     int j;
     Couple val;
 
@@ -201,16 +201,17 @@ void trierParMots(vector<Couple>& couples) {
             j = j - 1;
 
         }
-        
+
 
         couples[j + 1] = val;
 
     }
-
+    return couples;
 }
-void appliquerLesTris(vector<Couple>& vecteurATrier){
-    trierParFrequencesDecroissante(vecteurATrier);
-    trierParMots(vecteurATrier);
+
+void appliquerLesTris(vector<Couple>& vecteurATrier) {
+   vecteurATrier=trierParFrequencesDecroissante(vecteurATrier);
+   vecteurATrier= trierParMots(vecteurATrier);
 }
 
 void afficherCouples(vector<Couple>& couples) {
@@ -232,7 +233,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
     //dans la formation d'un mot
     char caractereCourant;
-    string motLu ;
+    string motLu;
 
     while (!fichier.eof()) {
         caractereCourant = fichier.get();
@@ -244,9 +245,9 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
         } else {
 
 
-            if (lesCouples.empty()&&motLu.size()>0) {
+            if (lesCouples.empty() && motLu.size() > 0) {
                 ajouterMot(motLu, lesCouples);
-            } else if(motLu.size()>0){
+            } else if (motLu.size() > 0) {
                 bool motDejaPresent = false;
                 for (vector<Couple>::iterator it = lesCouples.begin();
                         it != lesCouples.end(); ++it) {
