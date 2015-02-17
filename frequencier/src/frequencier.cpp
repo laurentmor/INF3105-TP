@@ -25,6 +25,7 @@ const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
 const string TROP_ARGUMENTS = "trop d'arguments fournis au programme";
 const string FICHIER_VIDE = "Fichier vide, rien à afficher";
+const string OUVERTURE_IMPOSSIBLE="impossible d'ouvrir le fichier: ";
 
 struct Couple {
     /**
@@ -228,7 +229,8 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     ifstream fichier;
     fichier.open(nomFichier, ios::in);
     fichier.close(); 
-    if (!fichier.is_open()) throw ifstream::failure("test");
+    if (!fichier.is_open()) throw ifstream::failure(NIVEAU_EXCEPTION_ERREUR+
+            OUVERTURE_IMPOSSIBLE +nomFichier);
 
     //on procède à la lecture caractère par caractère 
     //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
