@@ -86,12 +86,12 @@ void ajouterMot(const string&, vector<Couple>&);
  * Trier un vecteur donné par ordre de fréquence décroissante
  * @param le vecteur à trier
  */
-vector<Couple> trierParFrequencesDecroissante(vector<Couple>&);
+void trierParFrequencesDecroissante(vector<Couple>&);
 /**
  * Trier un vecteur donné par ordre de mots croissants
  * @param le vecteur à trier
  */
-vector<Couple> trierParMots(vector<Couple>&);
+void trierParMots(vector<Couple>&);
 
 void appliquerLesTris(vector<Couple>&);
 /*
@@ -159,7 +159,7 @@ bool nombreArgumentsCorrect(int argc) {
     } else return true;
 }
 
-vector<Couple> trierParFrequencesDecroissante(vector<Couple>& couples) {
+void trierParFrequencesDecroissante(vector<Couple>& couples) {
     int j;
     Couple val;
 
@@ -181,10 +181,10 @@ vector<Couple> trierParFrequencesDecroissante(vector<Couple>& couples) {
         couples[j + 1] = val;
 
     }
-    return couples;
+    
 }
 
-vector<Couple> trierParMots(vector<Couple>& couples) {
+void trierParMots(vector<Couple>& couples) {
     int j;
     Couple val;
 
@@ -206,12 +206,12 @@ vector<Couple> trierParMots(vector<Couple>& couples) {
         couples[j + 1] = val;
 
     }
-    return couples;
+     
 }
 
 void appliquerLesTris(vector<Couple>& vecteurATrier) {
-   vecteurATrier=trierParFrequencesDecroissante(vecteurATrier);
-   vecteurATrier= trierParMots(vecteurATrier);
+   trierParFrequencesDecroissante(vecteurATrier);
+   trierParMots(vecteurATrier);
 }
 
 void afficherCouples(vector<Couple>& couples) {
