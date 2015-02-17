@@ -37,6 +37,10 @@ struct Couple {
     int frequence;
 
 };
+enum TypeDeTri{
+    FREQ=0,
+    MOT=1
+};
 
 
 /**
@@ -90,7 +94,7 @@ void trierParInsertionFrequencesDecroissante(vector<Couple>&);
  * Trier un vecteur donné par ordre de mots croissants
  * @param le vecteur à trier
  */
-void trierParInsertionMotsCroissants(vector<Couple>&);
+void trierParInsertion(vector<Couple>&);
 /*
  * Afficher les résultats formatés
  * 
@@ -104,7 +108,7 @@ int main(int argc, char** argv) {
             lesCouples = creerCouplesAPartirDuFichier(argv[1]);
         }
         if (!lesCouples.empty()) {
-            trierParInsertionFrequencesDecroissante(lesCouples);
+            trierParInsertion(lesCouples);
             afficherCouples(lesCouples);
             
         } else {
@@ -156,7 +160,7 @@ bool nombreArgumentsCorrect(int argc) {
     } else return true;
 }
 
-void trierParInsertionFrequencesDecroissante(vector<Couple>& couples) {
+void trierParInsertion(vector<Couple>& couples) {
     int j;
     Couple val;
 
