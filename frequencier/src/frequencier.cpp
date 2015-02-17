@@ -177,6 +177,14 @@ void trierParInsertion(vector<Couple>& couples) {
             j = j - 1;
 
         }
+        
+        while (j >= 0 && couples[j].mot > val.mot) {
+
+            couples[j + 1] = couples[j];
+
+            j = j - 1;
+
+        }
 
         couples[j + 1] = val;
 
