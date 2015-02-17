@@ -20,12 +20,15 @@ using namespace std;
 /**
  * Les différents messages
  */
-const string FICHIER_MANQUANT = "nom du fichier à traiter manquant";
+const string FICHIER_MANQUANT = "nom du fichier \340 traiter manquant";
 const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
-const string TROP_ARGUMENTS = "trop d'arguments fournis au programme";
-const string FICHIER_VIDE = "Fichier vide, rien à afficher";
-const string OUVERTURE_IMPOSSIBLE="impossible d'ouvrir le fichier: ";
+const string TROP_ARGUMENTS = "trop d\'arguments fournis au programme";
+const string FICHIER_VIDE = "Fichier vide, rien \340 afficher";
+const string OUVERTURE_IMPOSSIBLE = "impossible d'ouvrir le fichier: ";
+const string VERIFIER="V\351rifiez que vous disposez";
+const string PERMISSIONS=" des permissions requises sur le fichier";
+
 
 struct Couple {
     /**
@@ -119,6 +122,9 @@ int main(int argc, char** argv) {
         cout << argv[0] << " " << e.what() << endl;
         afficherUsage(argv[0]);
         exit(-1);
+    }    catch (ifstream::failure fail) {
+         cout << argv[0] << " " << fail.what() << endl;
+         cout <<VERIFIER<<PERMISSIONS<<endl;
     }
     exit(0);
 }
@@ -182,7 +188,7 @@ void trierParFrequencesDecroissante(vector<Couple>& couples) {
         couples[j + 1] = val;
 
     }
-    
+
 }
 
 void trierParMots(vector<Couple>& couples) {
@@ -207,13 +213,13 @@ void trierParMots(vector<Couple>& couples) {
         couples[j + 1] = val;
 
     }
-     
+
 }
 
 void appliquerLesTris(vector<Couple>& vecteurATrier) {
     trierParMots(vecteurATrier);
     trierParFrequencesDecroissante(vecteurATrier);
-   
+
 }
 
 void afficherCouples(vector<Couple>& couples) {
@@ -228,9 +234,9 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     vector<Couple> lesCouples = vector<Couple>();
     ifstream fichier;
     fichier.open(nomFichier, ios::in);
-    fichier.close(); 
-    if (!fichier.is_open()) throw ifstream::failure(NIVEAU_EXCEPTION_ERREUR+
-            OUVERTURE_IMPOSSIBLE +nomFichier);
+    fichier.close();
+    if (!fichier.is_open()) throw ifstream::failure(NIVEAU_EXCEPTION_ERREUR +
+            OUVERTURE_IMPOSSIBLE + nomFichier);
 
     //on procède à la lecture caractère par caractère 
     //afin de ne pas inclure de caractères spéciaux comme é,! ou ?
@@ -252,7 +258,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
             if (lesCouples.empty() && motLu.size() > 0) {
                 ajouterMot(motLu, lesCouples);
             }//S'il ne s'agit pas du premier mot, on le recherche et met à jour
-             //la fréquence. 
+                //la fréquence. 
             else if (motLu.size() > 0) {
                 bool motDejaPresent = false;
                 for (vector<Couple>::iterator it = lesCouples.begin();
@@ -266,7 +272,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
                 }
                 //Si le mot n'est pas trouvé, on l'ajoute
                 if (!motDejaPresent) {
-                    
+
                     ajouterMot(motLu, lesCouples);
 
                 }
@@ -281,7 +287,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
 
 
     }
-  
+
     fichier.close();
     return lesCouples;
 }
