@@ -1,5 +1,64 @@
 
+/* 
 
+ * The MIT License
+
+ *
+
+ * Copyright 2015 Laurent Morissette.
+
+ *
+
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+
+ * of this software and associated documentation files (the "Software"), to deal
+
+ * in the Software without restriction, including without limitation the rights
+
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+
+ * copies of the Software, and to permit persons to whom the Software is
+
+ * furnished to do so, subject to the following conditions:
+
+ *
+
+ * The above copyright notice and this permission notice shall be included in
+
+ * all copies or substantial portions of the Software.
+
+ *
+
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+
+ * THE SOFTWARE.
+
+ */
+
+/**
+ * Auteur: Laurent Morissette - Hiver 2015
+ * Code permanent : MORL05058301
+ * Cours INF3105 
+ * Sujet: fréquencier est un programme  qui lit et tri des mots dans un fichier 
+ *        passé en paramètre de 2 façons:
+ *                                       par fréquence de mot dans le texte
+ *                                       Par ordre alphabétique
+ * 
+ *       Si on ne fournit pas de fichier, on affiche une erreur puis l'usage
+ *       Si on ne fournit pas (ou trop) de paramètre. c'est la même chose
+ *       Si le fichier passé en paramètre est inexistant on avise l'usager
+ *       S'il est impossible d'ouvrir le fichier, même chose   
+ */
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -8,12 +67,7 @@
 #include <vector>
 #include <cstdlib>
 #include<iomanip>
-/** 
- * File:   frequencier.cpp
- * Author: laurent
- *
- * Created on 8 février 2015, 14:42
- */
+
 
 using namespace std;
 
