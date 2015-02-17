@@ -99,17 +99,14 @@ void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
     try {
-        vector<Couple> lesCouples, lesCouplesTri1, lesCouplesTri2;
+        vector<Couple> lesCouples;
         if (ligneDeCommandeCorrecte(argc, argv)) {
             lesCouples = creerCouplesAPartirDuFichier(argv[1]);
         }
         if (!lesCouples.empty()) {
-            lesCouplesTri1 = lesCouples;
-            lesCouplesTri2 = lesCouples;
-            trierParInsertionFrequencesDecroissante(lesCouplesTri1);
-            afficherCouples(lesCouplesTri1);
-            //trierParInsertionMotsCroissants(lesCouplesTri2);
-            //afficherCouples(lesCouplesTri2);
+            trierParInsertionFrequencesDecroissante(lesCouples);
+            afficherCouples(lesCouples);
+            
         } else {
             cout << FICHIER_VIDE << endl;
         }
@@ -140,7 +137,8 @@ bool ligneDeCommandeCorrecte(int argc, char** argv) {
 bool verifierExistanceFicher(const char* nom) {
     ifstream fichier(nom);
     if (fichier) return true;
-    else throw runtime_error(NIVEAU_EXCEPTION_ERREUR + FICHIER_INEXISTANT + nom);
+    else throw runtime_error(NIVEAU_EXCEPTION_ERREUR + 
+            FICHIER_INEXISTANT + nom);
 }
 
 void ajouterMot(const string& mot, vector<Couple>& vc) {
@@ -182,29 +180,6 @@ void trierParInsertionFrequencesDecroissante(vector<Couple>& couples) {
 
 }
 
-void trierParInsertionMotsCroissants(vector<Couple>& couples) {
-    int j;
-    Couple val;
-
-    for (unsigned int i = 1; i < couples.size(); i++) {
-
-        val = couples[i];
-        j = i - 1;
-
-
-        while (j >= 0 && couples[j].mot > val.mot) {
-
-            couples[j + 1] = couples[j];
-
-            j = j - 1;
-
-        }
-
-        couples[j + 1] = val;
-
-    }
-
-}
 
 void afficherCouples(vector<Couple>& couples) {
     for (vector<Couple>::iterator it = couples.begin();
