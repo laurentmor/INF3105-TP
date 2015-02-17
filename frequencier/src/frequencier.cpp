@@ -104,9 +104,7 @@ void appliquerLesTris(vector<Couple>&);
 void afficherCouples(vector<Couple>&);
 
 int main(int argc, char** argv) {
-    ios_base::sync_with_stdio(false);
-    wcin.imbue(locale("en_US.UTF-8"));
-    wcout.imbue(locale("en_US.UTF-8"));
+   
     try {
         vector<Couple> lesCouples;
         if (ligneDeCommandeCorrecte(argc, argv)) {
@@ -121,11 +119,11 @@ int main(int argc, char** argv) {
         }
 
     } catch (runtime_error& e) {
-        wcout << argv[0] << " " << e.what() << endl;
+        cout << argv[0] << " " << e.what() << endl;
         afficherUsage(argv[0]);
         exit(-1);
     } catch (ifstream::failure fail) {
-        //wcout << argv[0] << " " <<L fail.what() << endl;
+        cout << argv[0] << " " <<fail.what() << endl;
         cout << VERIFIER << PERMISSIONS << endl;
     }
     exit(0);
