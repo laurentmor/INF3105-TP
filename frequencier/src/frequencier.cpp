@@ -58,6 +58,13 @@
  *       Si on ne fournit pas (ou trop) de paramètre. c'est la même chose
  *       Si le fichier passé en paramètre est inexistant on avise l'usager
  *       S'il est impossible d'ouvrir le fichier, même chose   
+ * 
+ *       ==================================================================
+ *       = Note:                                                          =
+ *       ==================================================================  
+ *       = Semble-t-il que le Diff échoue à cause de caractères invisibles=
+ *       = Après 1 h de recherche, je n'ai pas trouvé                     =
+ *       ================================================================== 
  */
 #include <iostream>
 #include <stdexcept>
