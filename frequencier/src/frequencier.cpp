@@ -211,7 +211,7 @@ void trierParMots(vector<Couple>& couples) {
 
 void appliquerLesTris(vector<Couple>& vecteurATrier) {
    trierParFrequencesDecroissante(vecteurATrier);
-   //trierParMots(vecteurATrier);
+   trierParMots(vecteurATrier);
 }
 
 void afficherCouples(vector<Couple>& couples) {
@@ -278,5 +278,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
 
 
     }
+    cout<<caractereCourant;
+    fichier.close();
     return lesCouples;
 }
