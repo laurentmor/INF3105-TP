@@ -235,7 +235,7 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
     char caractereCourant;
     string motLu;
 
-    do {
+    while (!fichier.eof()) {
         caractereCourant = fichier.get();
 
         if (isalnum(caractereCourant)) {
@@ -278,6 +278,5 @@ vector<Couple>creerCouplesAPartirDuFichier(const char* nomFichier) {
 
 
     }
-    while (!fichier.eof());
     return lesCouples;
 }
