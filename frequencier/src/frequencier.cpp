@@ -20,7 +20,7 @@ using namespace std;
 /**
  * Les différents messages
  */
-const string FICHIER_MANQUANT = "nom du fichier \340 traiter manquant";
+const string FICHIER_MANQUANT = "nom du fichier à traiter manquant";
 const string NIVEAU_EXCEPTION_ERREUR = "[Erreur] ";
 const string FICHIER_INEXISTANT = "fichier inexistant: ";
 const string TROP_ARGUMENTS = "trop d\'arguments fournis au programme";
@@ -123,7 +123,7 @@ int main(int argc, char** argv) {
         afficherUsage(argv[0]);
         exit(-1);
     }    catch (ifstream::failure fail) {
-         cout << argv[0] << " " << fail.what() << endl;
+         wcout << argv[0] << " " << fail.what() << endl;
          cout <<VERIFIER<<PERMISSIONS<<endl;
     }
     exit(0);
