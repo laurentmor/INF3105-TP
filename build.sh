@@ -4,6 +4,6 @@ cd frequencier
 make clean
 make
 ./frequencier 
-/frequencier big
+./frequencier big
 cd $base
 
