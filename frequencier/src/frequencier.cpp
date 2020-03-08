@@ -179,11 +179,11 @@ int main(int argc, char** argv) {
             cout << FICHIER_VIDE << endl;
         }
 
-    } catch (runtime_error& e) {
+    } catch (ifstream::failure e) {
         cout << argv[0] << " " << e.what() << endl;
         afficherUsage(argv[0]);
         exit(-1);
-    } catch (ifstream::failure fail) {
+    } catch (runtime_error& fail) {
         cout << argv[0] << " " <<fail.what() << endl;
         cout << VERIFIER << PERMISSIONS << endl;
     }
